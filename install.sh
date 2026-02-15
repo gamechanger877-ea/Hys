@@ -1262,6 +1262,15 @@ main() {
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     trap 'rm -f /tmp/*.tmp 2>/dev/null' EXIT
+    
+    # کپی اسکریپت به مسیر نصب اگر وجود ندارد
+    SCRIPT_PATH="/opt/vpn-multilayer/vpn-manager.sh"
+    if [[ ! -f "$SCRIPT_PATH" ]]; then
+        mkdir -p /opt/vpn-multilayer
+        cp "${BASH_SOURCE[0]}" "$SCRIPT_PATH"
+        chmod +x "$SCRIPT_PATH"
+    fi
+    
     if [[ ! -f /usr/local/bin/hys ]]; then
         create_launcher
     fi
