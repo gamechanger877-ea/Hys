@@ -1244,11 +1244,15 @@ main() {
             enforce_limits
             ;;
         menu)
-            show_menu
+            if [[ "$ROLE" == "unknown" ]]; then
+                install_menu
+            else
+                show_menu
+            fi
             ;;
         *)
             if [[ "$ROLE" == "unknown" ]]; then
-                echo "برای شروع، ابتدا نصب را اجرا کنید: $0 menu"
+                install_menu
             else
                 show_menu
             fi
